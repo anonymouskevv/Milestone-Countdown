@@ -2,92 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🔥 Milestone Countdown – YouTube Journey</title>
+  <title>ABHSTER's Monetization Countdown</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      background: #0d0d0d;
-      color: #fff;
+      background: #111;
+      color: #eee;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       padding: 40px 10px;
     }
     h1 {
       font-size: 2.5rem;
-      color: #00ff99;
+      color: #00ffc8;
     }
     .milestone {
-      margin: 40px 0;
-      border: 2px solid #00ffcc;
+      margin: 40px auto;
+      border: 2px solid #00ffc8;
       padding: 20px;
       border-radius: 15px;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: #1e1e1e;
+      max-width: 600px;
     }
     .milestone h2 {
       font-size: 1.8rem;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+      color: #ffffff;
     }
     .countdown {
       font-size: 2rem;
-      color: #ffcc00;
+      font-weight: bold;
+      color: #00ff88;
     }
-    .cta-btn {
-      margin-top: 20px;
+    .note {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .cta a {
       display: inline-block;
-      padding: 12px 25px;
-      font-size: 1.1rem;
-      background-color: #ff0055;
+      background: #ff4d4d;
       color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background 0.3s;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
       text-decoration: none;
-    }
-    .cta-btn:hover {
-      background-color: #ff3366;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 YouTube Viral Countdown</h1>
+  <h1>🚀 ABHSTER's Monetization Journey</h1>
+  <p class="note">Tracking progress at 100K views/day</p>
 
   <div class="milestone">
-    <h2>🎯 3M Views Milestone</h2>
+    <h2>🎯 3 Million Views Goal</h2>
     <div id="timer1" class="countdown">Loading...</div>
-    <a class="cta-btn" href="https://www.youtube.com/@yourchannel" target="_blank">🔥 Watch Viral Shorts</a>
+    <p class="note">Est. by: 28 July 2025</p>
   </div>
 
   <div class="milestone">
-    <h2>💸 10M Views + Full Monetization</h2>
+    <h2>💸 10 Million Views + Full Monetization</h2>
     <div id="timer2" class="countdown">Loading...</div>
-    <a class="cta-btn" href="https://www.youtube.com/@yourchannel" target="_blank">❤️ Subscribe Now</a>
+    <p class="note">Est. by: 6 October 2025</p>
+  </div>
+
+  <div class="cta">
+    <a href="https://youtube.com/@yourchannel" target="_blank">❤️ Subscribe to Support</a>
   </div>
 
   <script>
-    function startCountdown(id, targetDate) {
+    function countdown(id, targetDate) {
       const countDownDate = new Date(targetDate).getTime();
-      const timer = document.getElementById(id);
-
-      setInterval(function() {
+      const element = document.getElementById(id);
+      setInterval(() => {
         const now = new Date().getTime();
-        const distance = countDownDate - now;
-        if (distance < 0) {
-          timer.innerHTML = "✅ Completed!";
+        const diff = countDownDate - now;
+        if (diff < 0) {
+          element.innerHTML = "✅ Reached!";
           return;
         }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        element.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
       }, 1000);
     }
 
-    startCountdown("timer1", "August 17, 2025 00:00:00");
-    startCountdown("timer2", "November 25, 2025 00:00:00");
+    countdown("timer1", "July 28, 2025 00:00:00");
+    countdown("timer2", "October 6, 2025 00:00:00");
   </script>
 </body>
 </html>
