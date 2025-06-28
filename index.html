@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔥 Milestone Countdown – YouTube Journey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px 10px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #00ff99;
+    }
+    .milestone {
+      margin: 40px 0;
+      border: 2px solid #00ffcc;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    .milestone h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    .countdown {
+      font-size: 2rem;
+      color: #ffcc00;
+    }
+    .cta-btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      background-color: #ff0055;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .cta-btn:hover {
+      background-color: #ff3366;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 YouTube Viral Countdown</h1>
+
+  <div class="milestone">
+    <h2>🎯 3M Views Milestone</h2>
+    <div id="timer1" class="countdown">Loading...</div>
+    <a class="cta-btn" href="https://www.youtube.com/@yourchannel" target="_blank">🔥 Watch Viral Shorts</a>
+  </div>
+
+  <div class="milestone">
+    <h2>💸 10M Views + Full Monetization</h2>
+    <div id="timer2" class="countdown">Loading...</div>
+    <a class="cta-btn" href="https://www.youtube.com/@yourchannel" target="_blank">❤️ Subscribe Now</a>
+  </div>
+
+  <script>
+    function startCountdown(id, targetDate) {
+      const countDownDate = new Date(targetDate).getTime();
+      const timer = document.getElementById(id);
+
+      setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+        if (distance < 0) {
+          timer.innerHTML = "✅ Completed!";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }, 1000);
+    }
+
+    startCountdown("timer1", "August 17, 2025 00:00:00");
+    startCountdown("timer2", "November 25, 2025 00:00:00");
+  </script>
+</body>
+</html>
