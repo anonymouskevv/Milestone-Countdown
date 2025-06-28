@@ -5,19 +5,88 @@
   <title>Abhinav's YouTube Monetization Countdown</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { background: #111; color: #eee; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 40px 10px; }
-    h1 { font-size: 2.5rem; color: #00ffc8; }
-    .milestone { margin: 40px auto; border: 2px solid #00ffc8; padding: 20px; border-radius: 15px; background-color: #1e1e1e; max-width: 600px; }
-    .milestone h2 { font-size: 1.8rem; margin-bottom: 10px; color: #fff; }
-    .countdown { font-size: 2rem; font-weight: bold; color: #00ff88; margin-bottom: 8px; }
-    .note { font-size: 0.9rem; color: #aaa; }
-    .cta a { display: inline-block; background: #ff4d4d; color: white; padding: 12px 25px; border-radius: 25px; font-size: 1rem; text-decoration: none; margin-top: 20px; }
-    .latest { margin: 30px auto; text-align: left; max-width: 600px; }
-    .latest h3 { font-size: 1.5rem; color: #00e5ff; text-align: center; }
-    .video-list { list-style: none; padding: 0; margin: 10px 0; }
-    .video-item { margin: 8px 0; text-align: center; }
-    .video-item a { color: #ffcc66; text-decoration: none; font-size: 1.1rem; }
-    .video-item a:hover { text-decoration: underline; color: #fff; }
+    body {
+      background: #111;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px 10px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #00ffc8;
+    }
+    .milestone {
+      margin: 40px auto;
+      border: 2px solid #00ffc8;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: #1e1e1e;
+      max-width: 600px;
+    }
+    .milestone h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .countdown {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ff88;
+      margin-bottom: 8px;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .cta a {
+      display: inline-block;
+      background: #ff4d4d;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+    .latest {
+      margin: 30px auto;
+      text-align: center;
+      max-width: 800px;
+    }
+    .latest h3 {
+      font-size: 1.5rem;
+      color: #00e5ff;
+    }
+    .video-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 0;
+      margin-top: 20px;
+    }
+    .video-item {
+      width: 240px;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .video-item img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .video-item a {
+      display: block;
+      margin-top: 10px;
+      color: #ffcc66;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .video-item a:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -41,10 +110,10 @@
   </div>
 
   <div class="latest">
-    <h3>📹 Latest Videos from Abhinav</h3>
-    <ul class="video-list" id="videoList">
-      <li class="video-item">Loading recent uploads...</li>
-    </ul>
+    <h3>📹 Latest Shorts from Abhinav</h3>
+    <div class="video-list" id="videoList">
+      <p style="color: #aaa;">Loading latest videos...</p>
+    </div>
   </div>
 
   <script>
@@ -70,17 +139,26 @@
     countdown("timer1", "July 28, 2025 00:00:00");
     countdown("timer2", "October 6, 2025 00:00:00");
 
-    // Fetch latest videos using RSS to JSON proxy (via YT RSS feed)
+    // Load YouTube RSS feed (convert to JSON via rss2json)
     fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UC-_Rr9J_QHDhpZibJB6QusA")
       .then(res => res.json())
       .then(data => {
-        const list = document.getElementById("videoList");
-        list.innerHTML = "";
+        const videoList = document.getElementById("videoList");
+        videoList.innerHTML = "";
         data.items.slice(0, 3).forEach(video => {
-          const li = document.createElement("li");
-          li.className = "video-item";
-          li.innerHTML = `<a href="${video.link}" target="_blank">${video.title}</a>`;
-          list.appendChild(li);
+          const thumb = video.thumbnail;
+          const title = video.title;
+          const link = video.link;
+
+          const vid = document.createElement("div");
+          vid.className = "video-item";
+          vid.innerHTML = `
+            <a href="${link}" target="_blank">
+              <img src="${thumb}" alt="${title}">
+            </a>
+            <a href="${link}" target="_blank">${title}</a>
+          `;
+          videoList.appendChild(vid);
         });
       });
   </script>
