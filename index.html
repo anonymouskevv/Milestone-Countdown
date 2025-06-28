@@ -2,56 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ABHSTER's Monetization Countdown</title>
+  <title>Abhinav's YouTube Monetization Countdown</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      background: #111;
-      color: #eee;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      padding: 40px 10px;
-    }
-    h1 {
-      font-size: 2.5rem;
-      color: #00ffc8;
-    }
-    .milestone {
-      margin: 40px auto;
-      border: 2px solid #00ffc8;
-      padding: 20px;
-      border-radius: 15px;
-      background-color: #1e1e1e;
-      max-width: 600px;
-    }
-    .milestone h2 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      color: #ffffff;
-    }
-    .countdown {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #00ff88;
-    }
-    .note {
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-    .cta a {
-      display: inline-block;
-      background: #ff4d4d;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 25px;
-      font-size: 1rem;
-      text-decoration: none;
-      margin-top: 20px;
-    }
+    body { background: #111; color: #eee; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 40px 10px; }
+    h1 { font-size: 2.5rem; color: #00ffc8; }
+    .milestone { margin: 40px auto; border: 2px solid #00ffc8; padding: 20px; border-radius: 15px; background-color: #1e1e1e; max-width: 600px; }
+    .milestone h2 { font-size: 1.8rem; margin-bottom: 10px; color: #fff; }
+    .countdown { font-size: 2rem; font-weight: bold; color: #00ff88; margin-bottom: 8px; }
+    .note { font-size: 0.9rem; color: #aaa; }
+    .cta a { display: inline-block; background: #ff4d4d; color: white; padding: 12px 25px; border-radius: 25px; font-size: 1rem; text-decoration: none; margin-top: 20px; }
+    .latest { margin: 30px auto; text-align: left; max-width: 600px; }
+    .latest h3 { font-size: 1.5rem; color: #00e5ff; text-align: center; }
+    .video-list { list-style: none; padding: 0; margin: 10px 0; }
+    .video-item { margin: 8px 0; text-align: center; }
+    .video-item a { color: #ffcc66; text-decoration: none; font-size: 1.1rem; }
+    .video-item a:hover { text-decoration: underline; color: #fff; }
   </style>
 </head>
 <body>
-  <h1>🚀 ABHSTER's Monetization Journey</h1>
+  <h1>🚀 Abhinav’s YouTube Monetization Countdown</h1>
   <p class="note">Tracking progress at 100K views/day</p>
 
   <div class="milestone">
@@ -67,10 +37,18 @@
   </div>
 
   <div class="cta">
-    <a href="https://youtube.com/@yourchannel" target="_blank">❤️ Subscribe to Support</a>
+    <a href="https://www.youtube.com/channel/UC-_Rr9J_QHDhpZibJB6QusA" target="_blank">❤️ Subscribe to Support Abhinav</a>
+  </div>
+
+  <div class="latest">
+    <h3>📹 Latest Videos from Abhinav</h3>
+    <ul class="video-list" id="videoList">
+      <li class="video-item">Loading recent uploads...</li>
+    </ul>
   </div>
 
   <script>
+    // Countdown logic
     function countdown(id, targetDate) {
       const countDownDate = new Date(targetDate).getTime();
       const element = document.getElementById(id);
@@ -91,6 +69,20 @@
 
     countdown("timer1", "July 28, 2025 00:00:00");
     countdown("timer2", "October 6, 2025 00:00:00");
+
+    // Fetch latest videos using RSS to JSON proxy (via YT RSS feed)
+    fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UC-_Rr9J_QHDhpZibJB6QusA")
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById("videoList");
+        list.innerHTML = "";
+        data.items.slice(0, 3).forEach(video => {
+          const li = document.createElement("li");
+          li.className = "video-item";
+          li.innerHTML = `<a href="${video.link}" target="_blank">${video.title}</a>`;
+          list.appendChild(li);
+        });
+      });
   </script>
 </body>
 </html>
